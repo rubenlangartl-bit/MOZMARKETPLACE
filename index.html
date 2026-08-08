@@ -1,978 +1,1067 @@
 <!DOCTYPE html>
 <html lang="pt">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MozabazarHub — Compra e vende em Moçambique</title>
 
-    <title>MozabazarHub — Compra e vende em Moçambique</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
 
-    <style>
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
+body{
+    font-family:Arial,sans-serif;
+    background:#f6f7f9;
+    color:#171717;
+}
 
-        body {
-            font-family: Arial, sans-serif;
-            background: #f6f7f9;
-            color: #171717;
-        }
+header{
+    background:white;
+    border-bottom:1px solid #e5e5e5;
+    position:sticky;
+    top:0;
+    z-index:100;
+}
 
-        header {
-            background: white;
-            border-bottom: 1px solid #e5e5e5;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-        }
+.topbar{
+    max-width:1200px;
+    margin:auto;
+    padding:16px 20px;
+    display:flex;
+    align-items:center;
+    gap:20px;
+}
 
-        .topbar {
-            max-width: 1200px;
-            margin: auto;
-            padding: 16px 20px;
-            display: flex;
-            align-items: center;
-            gap: 20px;
-        }
+.logo{
+    font-size:23px;
+    font-weight:800;
+    white-space:nowrap;
+}
 
-        .logo {
-            font-size: 23px;
-            font-weight: 800;
-            white-space: nowrap;
-        }
+.logo span{color:#0b8f4d}
 
-        .logo span {
-            color: #0b8f4d;
-        }
+.search-box{flex:1}
 
-        .search-box {
-            flex: 1;
-        }
+.search-box input{
+    width:100%;
+    padding:13px 18px;
+    border:1px solid #ddd;
+    border-radius:10px;
+    outline:none;
+    font-size:15px;
+    background:#f8f8f8;
+}
 
-        .search-box input {
-            width: 100%;
-            padding: 13px 18px;
-            border: 1px solid #ddd;
-            border-radius: 10px;
-            outline: none;
-            font-size: 15px;
-            background: #f8f8f8;
-        }
+.sell-button{
+    background:#0b8f4d;
+    color:white;
+    border:none;
+    padding:13px 18px;
+    border-radius:9px;
+    font-weight:bold;
+    cursor:pointer;
+    white-space:nowrap;
+}
 
-        .sell-button {
-            background: #0b8f4d;
-            color: white;
-            border: none;
-            padding: 13px 18px;
-            border-radius: 9px;
-            font-weight: bold;
-            cursor: pointer;
-            white-space: nowrap;
-        }
+.hero{
+    background:linear-gradient(135deg,#071b12,#0b8f4d);
+    color:white;
+    padding:55px 20px;
+}
 
-        .hero {
-            background: linear-gradient(135deg, #071b12, #0b8f4d);
-            color: white;
-            padding: 55px 20px;
-        }
+.hero-content{
+    max-width:1200px;
+    margin:auto;
+}
 
-        .hero-content {
-            max-width: 1200px;
-            margin: auto;
-        }
+.hero h1{
+    font-size:38px;
+    margin-bottom:12px;
+}
 
-        .hero h1 {
-            font-size: 38px;
-            margin-bottom: 12px;
-        }
+.hero p{
+    font-size:17px;
+    opacity:.9;
+    max-width:600px;
+    line-height:1.6;
+}
 
-        .hero p {
-            font-size: 17px;
-            opacity: .9;
-            max-width: 600px;
-            line-height: 1.6;
-        }
+.hero-buttons{margin-top:25px}
 
-        .hero-buttons {
-            margin-top: 25px;
-        }
+.hero-button{
+    padding:13px 20px;
+    border-radius:9px;
+    border:none;
+    font-weight:bold;
+    cursor:pointer;
+    margin-right:8px;
+}
 
-        .hero-button {
-            padding: 13px 20px;
-            border-radius: 9px;
-            border: none;
-            font-weight: bold;
-            cursor: pointer;
-            margin-right: 8px;
-        }
+.primary{
+    background:white;
+    color:#087a41;
+}
 
-        .primary {
-            background: white;
-            color: #087a41;
-        }
+.secondary{
+    background:transparent;
+    color:white;
+    border:1px solid white;
+}
 
-        .secondary {
-            background: transparent;
-            color: white;
-            border: 1px solid white;
-        }
+.container{
+    max-width:1200px;
+    margin:auto;
+    padding:35px 20px;
+}
 
-        .container {
-            max-width: 1200px;
-            margin: auto;
-            padding: 35px 20px;
-        }
+.section-title{
+    display:flex;
+    justify-content:space-between;
+    margin-bottom:18px;
+}
 
-        .section-title {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 18px;
-        }
+.categories{
+    display:grid;
+    grid-template-columns:repeat(6,1fr);
+    gap:12px;
+    margin-bottom:40px;
+}
 
-        .categories {
-            display: grid;
-            grid-template-columns: repeat(6, 1fr);
-            gap: 12px;
-            margin-bottom: 40px;
-        }
+.category{
+    background:white;
+    border:1px solid #e7e7e7;
+    border-radius:12px;
+    padding:20px 10px;
+    text-align:center;
+    cursor:pointer;
+    transition:.2s;
+}
 
-        .category {
-            background: white;
-            border: 1px solid #e7e7e7;
-            border-radius: 12px;
-            padding: 20px 10px;
-            text-align: center;
-            cursor: pointer;
-        }
+.category:hover{
+    border-color:#0b8f4d;
+    transform:translateY(-3px);
+}
 
-        .category:hover {
-            border-color: #0b8f4d;
-            transform: translateY(-3px);
-        }
+.category-icon{
+    font-size:28px;
+    margin-bottom:9px;
+}
 
-        .category-icon {
-            font-size: 28px;
-            margin-bottom: 9px;
-        }
+.category-name{
+    font-size:14px;
+    font-weight:bold;
+}
 
-        .category-name {
-            font-size: 14px;
-            font-weight: bold;
-        }
+.products{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:20px;
+}
 
-        .products {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 20px;
-        }
+.product{
+    background:white;
+    border-radius:14px;
+    overflow:hidden;
+    border:1px solid #e6e6e6;
+}
 
-        .product {
-            background: white;
-            border-radius: 14px;
-            overflow: hidden;
-            border: 1px solid #e6e6e6;
-        }
+.product-image{
+    position:relative;
+}
 
-        .product-image {
-            position: relative;
-        }
+.product-image img{
+    width:100%;
+    height:230px;
+    object-fit:cover;
+    display:block;
+}
 
-        .product-image img {
-            width: 100%;
-            height: 230px;
-            object-fit: cover;
-            display: block;
-        }
+.favorite{
+    position:absolute;
+    top:12px;
+    right:12px;
+    width:38px;
+    height:38px;
+    border-radius:50%;
+    border:none;
+    background:white;
+    font-size:18px;
+    cursor:pointer;
+}
 
-        .favorite {
-            position: absolute;
-            top: 12px;
-            right: 12px;
-            width: 38px;
-            height: 38px;
-            border-radius: 50%;
-            border: none;
-            background: white;
-            font-size: 18px;
-            cursor: pointer;
-        }
+.product-info{padding:17px}
 
-        .product-info {
-            padding: 17px;
-        }
+.product-category{
+    color:#0b8f4d;
+    font-size:12px;
+    font-weight:bold;
+    margin-bottom:7px;
+}
 
-        .product-category {
-            color: #0b8f4d;
-            font-size: 12px;
-            font-weight: bold;
-            margin-bottom: 7px;
-        }
+.product h3{
+    font-size:18px;
+    margin-bottom:8px;
+}
 
-        .product h3 {
-            font-size: 18px;
-            margin-bottom: 8px;
-        }
+.price{
+    font-size:20px;
+    font-weight:800;
+    margin-bottom:8px;
+}
 
-        .price {
-            font-size: 20px;
-            font-weight: 800;
-            margin-bottom: 8px;
-        }
+.location{
+    color:#777;
+    font-size:13px;
+    margin-bottom:13px;
+}
 
-        .location {
-            color: #777;
-            font-size: 13px;
-            margin-bottom: 13px;
-        }
+.description{
+    color:#666;
+    font-size:13px;
+    margin-bottom:12px;
+    line-height:1.4;
+}
 
-        .contact-button {
-            width: 100%;
-            padding: 11px;
-            border: none;
-            border-radius: 8px;
-            background: #0b8f4d;
-            color: white;
-            font-weight: bold;
-            cursor: pointer;
-        }
+.contact-button{
+    width:100%;
+    padding:11px;
+    border:none;
+    border-radius:8px;
+    background:#0b8f4d;
+    color:white;
+    font-weight:bold;
+    cursor:pointer;
+}
 
-        .cta {
-            margin-top: 45px;
-            background: white;
-            border: 1px solid #e5e5e5;
-            border-radius: 15px;
-            padding: 30px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
+.cta{
+    margin-top:45px;
+    background:white;
+    border:1px solid #e5e5e5;
+    border-radius:15px;
+    padding:30px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+}
 
-        footer {
-            background: #101010;
-            color: white;
-            margin-top: 50px;
-            padding: 35px 20px;
-        }
+footer{
+    background:#101010;
+    color:white;
+    margin-top:50px;
+    padding:35px 20px;
+}
 
-        .footer-content {
-            max-width: 1200px;
-            margin: auto;
-            display: flex;
-            justify-content: space-between;
-        }
+.footer-content{
+    max-width:1200px;
+    margin:auto;
+}
 
-        .footer-text {
-            color: #aaa;
-            max-width: 350px;
-            margin-top: 10px;
-        }
+.footer-text{
+    color:#aaa;
+    max-width:350px;
+    margin-top:10px;
+}
 
-        /* FORMULÁRIO */
+.modal{
+    display:none;
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,.65);
+    z-index:1000;
+    padding:20px;
+    overflow-y:auto;
+}
 
-        .modal {
-            display: none;
-            position: fixed;
-            inset: 0;
-            background: rgba(0,0,0,.65);
-            z-index: 1000;
-            padding: 20px;
-            overflow-y: auto;
-        }
+.modal-content{
+    background:white;
+    max-width:550px;
+    margin:40px auto;
+    border-radius:15px;
+    padding:25px;
+}
 
-        .modal-content {
-            background: white;
-            max-width: 550px;
-            margin: 40px auto;
-            border-radius: 15px;
-            padding: 25px;
-        }
+.modal-header{
+    display:flex;
+    justify-content:space-between;
+    margin-bottom:20px;
+}
 
-        .modal-header {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 20px;
-        }
+.close{
+    border:none;
+    background:none;
+    font-size:25px;
+    cursor:pointer;
+}
 
-        .close {
-            border: none;
-            background: none;
-            font-size: 25px;
-            cursor: pointer;
-        }
+.form-group{margin-bottom:15px}
 
-        .form-group {
-            margin-bottom: 15px;
-        }
+.form-group label{
+    display:block;
+    font-weight:bold;
+    margin-bottom:7px;
+}
 
-        .form-group label {
-            display: block;
-            font-weight: bold;
-            margin-bottom: 7px;
-        }
+.form-group input,
+.form-group select,
+.form-group textarea{
+    width:100%;
+    padding:12px;
+    border:1px solid #ddd;
+    border-radius:8px;
+    font-size:15px;
+}
 
-        .form-group input,
-        .form-group select,
-        .form-group textarea {
-            width: 100%;
-            padding: 12px;
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            font-size: 15px;
-        }
+.form-group textarea{
+    height:100px;
+    resize:vertical;
+}
 
-        .form-group textarea {
-            height: 100px;
-            resize: vertical;
-        }
+.publish-button{
+    width:100%;
+    padding:14px;
+    border:none;
+    border-radius:9px;
+    background:#0b8f4d;
+    color:white;
+    font-size:16px;
+    font-weight:bold;
+    cursor:pointer;
+}
 
-        .publish-button {
-            width: 100%;
-            padding: 14px;
-            border: none;
-            border-radius: 9px;
-            background: #0b8f4d;
-            color: white;
-            font-size: 16px;
-            font-weight: bold;
-            cursor: pointer;
-        }
+.empty{
+    grid-column:1/-1;
+    background:white;
+    padding:30px;
+    border-radius:12px;
+    text-align:center;
+    color:#777;
+}
 
-        @media (max-width: 800px) {
-            .topbar {
-                flex-wrap: wrap;
-            }
+.loading{
+    grid-column:1/-1;
+    text-align:center;
+    padding:30px;
+}
 
-            .logo {
-                width: 100%;
-            }
+@media(max-width:800px){
 
-            .search-box {
-                width: 100%;
-                order: 3;
-            }
+    .topbar{
+        flex-wrap:wrap;
+    }
 
-            .categories {
-                grid-template-columns: repeat(3, 1fr);
-            }
+    .logo{
+        width:100%;
+    }
 
-            .products {
-                grid-template-columns: repeat(2, 1fr);
-            }
+    .search-box{
+        width:100%;
+        order:3;
+    }
 
-            .cta {
-                flex-direction: column;
-                align-items: flex-start;
-                gap: 15px;
-            }
-        }
+    .categories{
+        grid-template-columns:repeat(3,1fr);
+    }
 
-        @media (max-width: 500px) {
-            .categories {
-                grid-template-columns: repeat(2, 1fr);
-            }
+    .products{
+        grid-template-columns:repeat(2,1fr);
+    }
 
-            .products {
-                grid-template-columns: 1fr;
-            }
+    .cta{
+        flex-direction:column;
+        align-items:flex-start;
+        gap:15px;
+    }
+}
 
-            .hero h1 {
-                font-size: 28px;
-            }
-        }
-    </style>
+@media(max-width:500px){
+
+    .categories{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .products{
+        grid-template-columns:1fr;
+    }
+
+    .hero h1{
+        font-size:28px;
+    }
+}
+</style>
 </head>
 
 <body>
 
 <header>
-    <div class="topbar">
+<div class="topbar">
 
-        <div class="logo">
-            🛒 <span>Moza</span>bazarHub
-        </div>
+<div class="logo">
+🛒 <span>Moza</span>bazarHub
+</div>
 
-        <div class="search-box">
-            <input
-                type="text"
-                id="search"
-                placeholder="🔎 Procurar produtos..."
-            >
-        </div>
+<div class="search-box">
+<input
+type="text"
+id="search"
+placeholder="🔎 Procurar produtos..."
+>
+</div>
 
-        <button class="sell-button" onclick="openModal()">
-            + Publicar anúncio
-        </button>
+<button class="sell-button" onclick="openModal()">
++ Publicar anúncio
+</button>
 
-    </div>
+</div>
 </header>
 
-
 <section class="hero">
+<div class="hero-content">
 
-    <div class="hero-content">
+<h1>Compra e vende em Moçambique 🇲🇿</h1>
 
-        <h1>Compra e vende em Moçambique 🇲🇿</h1>
+<p>
+Encontra produtos perto de ti ou publica o teu próprio anúncio
+no MozabazarHub.
+</p>
 
-        <p>
-            Encontra produtos perto de ti ou publica o teu próprio anúncio
-            no MozabazarHub.
-        </p>
+<div class="hero-buttons">
 
-        <div class="hero-buttons">
+<button
+class="hero-button primary"
+onclick="scrollToProducts()">
+Explorar produtos
+</button>
 
-            <button class="hero-button primary" onclick="scrollToProducts()">
-                Explorar produtos
-            </button>
+<button
+class="hero-button secondary"
+onclick="openModal()">
+Publicar anúncio
+</button>
 
-            <button class="hero-button secondary" onclick="openModal()">
-                Publicar anúncio
-            </button>
-
-        </div>
-
-    </div>
-
+</div>
+</div>
 </section>
-
 
 <main class="container">
 
-    <div class="section-title">
-        <h2>Explorar categorias</h2>
-    </div>
-
-    <div class="categories">
-
-        <div class="category" onclick="filterCategory('Telemóveis')">
-            <div class="category-icon">📱</div>
-            <div class="category-name">Telemóveis</div>
-        </div>
-
-        <div class="category" onclick="filterCategory('Computadores')">
-            <div class="category-icon">💻</div>
-            <div class="category-name">Computadores</div>
-        </div>
-
-        <div class="category" onclick="filterCategory('Moda')">
-            <div class="category-icon">👟</div>
-            <div class="category-name">Moda</div>
-        </div>
-
-        <div class="category" onclick="filterCategory('Carros')">
-            <div class="category-icon">🚗</div>
-            <div class="category-name">Carros</div>
-        </div>
-
-        <div class="category" onclick="filterCategory('Casa')">
-            <div class="category-icon">🏠</div>
-            <div class="category-name">Casa</div>
-        </div>
-
-        <div class="category" onclick="filterCategory('Jogos')">
-            <div class="category-icon">🎮</div>
-            <div class="category-name">Jogos</div>
-        </div>
-
-    </div>
-
-
-    <div class="section-title" id="products-section">
-        <h2>Produtos recentes</h2>
-    </div>
-
-
-    <div class="products" id="products">
-
-        <div class="product" data-category="Telemóveis">
-
-            <div class="product-image">
-
-                <img
-                    src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9"
-                    alt="Samsung Galaxy"
-                >
-
-                <button class="favorite" onclick="favorite(this)">
-                    ♡
-                </button>
-
-            </div>
-
-            <div class="product-info">
-
-                <div class="product-category">
-                    Telemóveis
-                </div>
-
-                <h3>Samsung Galaxy</h3>
-
-                <div class="price">
-                    8.500 MT
-                </div>
-
-                <div class="location">
-                    📍 Maputo
-                </div>
-
-                <button class="contact-button"
-                    onclick="contactSeller('Samsung Galaxy')">
-                    Contactar vendedor
-                </button>
-
-            </div>
-
-        </div>
-
-
-        <div class="product" data-category="Computadores">
-
-            <div class="product-image">
-
-                <img
-                    src="https://images.unsplash.com/photo-1496181133206-80ce9b88a853"
-                    alt="Laptop HP"
-                >
-
-                <button class="favorite" onclick="favorite(this)">
-                    ♡
-                </button>
-
-            </div>
-
-            <div class="product-info">
-
-                <div class="product-category">
-                    Computadores
-                </div>
-
-                <h3>Laptop HP</h3>
-
-                <div class="price">
-                    18.000 MT
-                </div>
-
-                <div class="location">
-                    📍 Matola
-                </div>
-
-                <button class="contact-button"
-                    onclick="contactSeller('Laptop HP')">
-                    Contactar vendedor
-                </button>
-
-            </div>
-
-        </div>
-
-
-        <div class="product" data-category="Moda">
-
-            <div class="product-image">
-
-                <img
-                    src="https://images.unsplash.com/photo-1542291026-7eec264c27ff"
-                    alt="Tênis"
-                >
-
-                <button class="favorite" onclick="favorite(this)">
-                    ♡
-                </button>
-
-            </div>
-
-            <div class="product-info">
-
-                <div class="product-category">
-                    Moda
-                </div>
-
-                <h3>Tênis</h3>
-
-                <div class="price">
-                    2.500 MT
-                </div>
-
-                <div class="location">
-                    📍 Maputo
-                </div>
-
-                <button class="contact-button"
-                    onclick="contactSeller('Tênis')">
-                    Contactar vendedor
-                </button>
-
-            </div>
-
-        </div>
-
-    </div>
-
-
-    <section class="cta">
-
-        <div>
-            <h2>Tens algo para vender?</h2>
-
-            <p>
-                Publica o teu anúncio e encontra compradores em Moçambique.
-            </p>
-        </div>
-
-        <button class="sell-button" onclick="openModal()">
-            + Publicar anúncio
-        </button>
-
-    </section>
-
-</main>
-
-
-<footer>
-
-    <div class="footer-content">
-
-        <div>
-            <strong>🛒 MozabazarHub</strong>
-
-            <p class="footer-text">
-                Um marketplace para comprar e vender produtos em Moçambique.
-            </p>
-        </div>
-
-    </div>
-
-</footer>
-
-
-<!-- FORMULÁRIO DE PUBLICAÇÃO -->
-
-<div class="modal" id="publishModal">
-
-    <div class="modal-content">
-
-        <div class="modal-header">
-
-            <h2>Publicar anúncio</h2>
-
-            <button class="close" onclick="closeModal()">
-                ×
-            </button>
-
-        </div>
-
-
-        <form id="publishForm">
-
-            <div class="form-group">
-
-                <label>Nome do produto</label>
-
-                <input
-                    type="text"
-                    id="productName"
-                    placeholder="Ex: iPhone 13"
-                    required
-                >
-
-            </div>
-
-
-            <div class="form-group">
-
-                <label>Preço (MT)</label>
-
-                <input
-                    type="number"
-                    id="productPrice"
-                    placeholder="Ex: 25000"
-                    required
-                >
-
-            </div>
-
-
-            <div class="form-group">
-
-                <label>Categoria</label>
-
-                <select id="productCategory" required>
-
-                    <option value="">
-                        Escolher categoria
-                    </option>
-
-                    <option>Telemóveis</option>
-                    <option>Computadores</option>
-                    <option>Moda</option>
-                    <option>Carros</option>
-                    <option>Casa</option>
-                    <option>Jogos</option>
-                    <option>Outros</option>
-
-                </select>
-
-            </div>
-
-
-            <div class="form-group">
-
-                <label>Localização</label>
-
-                <input
-                    type="text"
-                    id="productLocation"
-                    placeholder="Ex: Maputo"
-                    required
-                >
-
-            </div>
-
-
-            <div class="form-group">
-
-                <label>Descrição</label>
-
-                <textarea
-                    id="productDescription"
-                    placeholder="Descreve o produto..."
-                ></textarea>
-
-            </div>
-
-
-            <div class="form-group">
-
-                <label>Imagem do produto</label>
-
-                <input
-                    type="file"
-                    id="productImage"
-                    accept="image/*"
-                >
-
-            </div>
-
-
-            <button
-                type="submit"
-                class="publish-button"
-            >
-                Publicar anúncio
-            </button>
-
-        </form>
-
-    </div>
+<div class="section-title">
+<h2>Explorar categorias</h2>
+</div>
+
+<div class="categories">
+
+<div class="category" onclick="filterCategory('Telemóveis')">
+<div class="category-icon">📱</div>
+<div class="category-name">Telemóveis</div>
+</div>
+
+<div class="category" onclick="filterCategory('Computadores')">
+<div class="category-icon">💻</div>
+<div class="category-name">Computadores</div>
+</div>
+
+<div class="category" onclick="filterCategory('Moda')">
+<div class="category-icon">👟</div>
+<div class="category-name">Moda</div>
+</div>
+
+<div class="category" onclick="filterCategory('Carros')">
+<div class="category-icon">🚗</div>
+<div class="category-name">Carros</div>
+</div>
+
+<div class="category" onclick="filterCategory('Casa')">
+<div class="category-icon">🏠</div>
+<div class="category-name">Casa</div>
+</div>
+
+<div class="category" onclick="filterCategory('Jogos')">
+<div class="category-icon">🎮</div>
+<div class="category-name">Jogos</div>
+</div>
 
 </div>
 
+<div class="section-title" id="products-section">
+<h2>Produtos recentes</h2>
+</div>
+
+<div class="products" id="products">
+<div class="loading">A carregar produtos...</div>
+</div>
+
+<section class="cta">
+
+<div>
+<h2>Tens algo para vender?</h2>
+
+<p>
+Publica o teu anúncio e encontra compradores em Moçambique.
+</p>
+</div>
+
+<button class="sell-button" onclick="openModal()">
++ Publicar anúncio
+</button>
+
+</section>
+
+</main>
+
+<footer>
+
+<div class="footer-content">
+
+<strong>🛒 MozabazarHub</strong>
+
+<p class="footer-text">
+Um marketplace para comprar e vender produtos em Moçambique.
+</p>
+
+</div>
+
+</footer>
+
+<!-- FORMULÁRIO -->
+
+<div class="modal" id="publishModal">
+
+<div class="modal-content">
+
+<div class="modal-header">
+
+<h2>Publicar anúncio</h2>
+
+<button class="close" onclick="closeModal()">×</button>
+
+</div>
+
+<form id="publishForm">
+
+<div class="form-group">
+<label>Nome do produto</label>
+
+<input
+type="text"
+id="productName"
+placeholder="Ex: iPhone 13"
+required
+>
+</div>
+
+<div class="form-group">
+<label>Preço (MT)</label>
+
+<input
+type="number"
+id="productPrice"
+placeholder="Ex: 25000"
+required
+>
+</div>
+
+<div class="form-group">
+<label>Categoria</label>
+
+<select id="productCategory" required>
+
+<option value="">Escolher categoria</option>
+<option>Telemóveis</option>
+<option>Computadores</option>
+<option>Moda</option>
+<option>Carros</option>
+<option>Casa</option>
+<option>Jogos</option>
+<option>Outros</option>
+
+</select>
+</div>
+
+<div class="form-group">
+<label>Localização</label>
+
+<input
+type="text"
+id="productLocation"
+placeholder="Ex: Maputo"
+required
+>
+</div>
+
+<div class="form-group">
+<label>Descrição</label>
+
+<textarea
+id="productDescription"
+placeholder="Descreve o produto..."
+></textarea>
+</div>
+
+<div class="form-group">
+<label>Imagem do produto</label>
+
+<input
+type="file"
+id="productImage"
+accept="image/*"
+>
+</div>
+
+<button
+type="submit"
+class="publish-button">
+Publicar anúncio
+</button>
+
+</form>
+
+</div>
+</div>
 
 <script>
 
-    /* ABRIR FORMULÁRIO */
+/* ================================
+   SUPABASE
+================================ */
 
-    function openModal() {
+/*
+   COLOCA OS TEUS DOIS VALORES AQUI
+*/
 
-        document.getElementById("publishModal").style.display = "block";
+const SUPABASE_URL =
+"https://mcwlozpxxytuflgqnthm.supabase.co";
 
-    }
+const SUPABASE_KEY =
+"sb_publishable_gH8QmcjOuCeFf_lB245IkQ_6mG3qd_M";
 
 
-    /* FECHAR FORMULÁRIO */
+/* ================================
+   ABRIR / FECHAR MODAL
+================================ */
 
-    function closeModal() {
+function openModal(){
 
-        document.getElementById("publishModal").style.display = "none";
+document.getElementById("publishModal")
+.style.display="block";
 
-    }
+}
 
+function closeModal(){
 
-    /* PESQUISA */
+document.getElementById("publishModal")
+.style.display="none";
 
-    document.getElementById("search").addEventListener("input", function() {
+}
 
-        const text = this.value.toLowerCase();
 
-        document.querySelectorAll(".product").forEach(function(product) {
+/* ================================
+   CRIAR CARD
+================================ */
 
-            const name =
-                product.querySelector("h3")
-                .textContent
-                .toLowerCase();
+function createProductCard(product){
 
-            const category =
-                product.dataset.category.toLowerCase();
+const div=document.createElement("div");
 
-            product.style.display =
-                name.includes(text) || category.includes(text)
-                ? "block"
-                : "none";
+div.className="product";
 
-        });
+div.dataset.category=product.category || "Outros";
 
-    });
+const image=
+product.image_url ||
+"https://images.unsplash.com/photo-1523275335684-37898b6baf30";
 
+const price=
+Number(product.price || 0)
+.toLocaleString("pt-MZ");
 
-    /* FILTRAR CATEGORIA */
+div.innerHTML=`
 
-    function filterCategory(category) {
+<div class="product-image">
 
-        document.querySelectorAll(".product").forEach(function(product) {
+<img
+src="${image}"
+alt="${product.name || "Produto"}"
+>
 
-            product.style.display =
-                product.dataset.category === category
-                ? "block"
-                : "none";
+<button
+class="favorite"
+onclick="favorite(this)">
+♡
+</button>
 
-        });
+</div>
 
-        document.getElementById("products-section")
-            .scrollIntoView({ behavior: "smooth" });
+<div class="product-info">
 
-    }
+<div class="product-category">
+${product.category || "Outros"}
+</div>
 
+<h3>${product.name || "Produto"}</h3>
 
-    /* FAVORITOS */
+<div class="price">
+${price} MT
+</div>
 
-    function favorite(button) {
+<div class="location">
+📍 ${product.location || "Moçambique"}
+</div>
 
-        button.textContent =
-            button.textContent === "♡"
-            ? "♥"
-            : "♡";
+${
+product.description
+?
+`<div class="description">${product.description}</div>`
+:
+""
+}
 
-    }
+<button
+class="contact-button"
+onclick="contactSeller('${String(product.name || "produto").replace(/'/g,"\\'")}')">
+Contactar vendedor
+</button>
 
+</div>
+`;
 
-    /* CONTACTO */
+return div;
 
-    function contactSeller(product) {
+}
 
-        alert(
-            "O contacto do vendedor de " +
-            product +
-            " será adicionado em breve."
-        );
 
-    }
+/* ================================
+   CARREGAR PRODUTOS
+================================ */
 
+async function loadProducts(){
 
-    /* SCROLL */
+const container=
+document.getElementById("products");
 
-    function scrollToProducts() {
+try{
 
-        document.getElementById("products-section")
-            .scrollIntoView({ behavior: "smooth" });
+const response=await fetch(
+`${SUPABASE_URL}/rest/v1/products?select=*&order=created_at.desc`,
+{
+headers:{
+"apikey":SUPABASE_KEY,
+"Authorization":`Bearer ${SUPABASE_KEY}`
+}
+}
+);
 
-    }
+if(!response.ok){
 
+throw new Error(
+await response.text()
+);
 
-    /* PUBLICAR PRODUTO */
+}
 
-    document.getElementById("publishForm")
-        .addEventListener("submit", function(event) {
+const products=await response.json();
 
-        event.preventDefault();
+container.innerHTML="";
 
-        const name =
-            document.getElementById("productName").value;
+if(products.length===0){
 
-        const price =
-            document.getElementById("productPrice").value;
+container.innerHTML=
+`<div class="empty">
+Ainda não existem anúncios publicados.
+</div>`;
 
-        const category =
-            document.getElementById("productCategory").value;
+return;
 
-        const location =
-            document.getElementById("productLocation").value;
+}
 
-        const description =
-            document.getElementById("productDescription").value;
+products.forEach(product=>{
 
-        const imageInput =
-            document.getElementById("productImage");
+container.appendChild(
+createProductCard(product)
+);
 
-        let image =
-            "https://images.unsplash.com/photo-1523275335684-37898b6baf30";
-
-        if (imageInput.files.length > 0) {
-
-            image =
-                URL.createObjectURL(imageInput.files[0]);
-
-        }
- <script>  
-                          
-const SUPABASE_URL = "https://mcwlozpxxytuflgqnthm.supabase.co/rest/v1/";
-const SUPABASE_KEY = "sb_publishable_gH8QmcjOuCeFf_lB245IkQ_6mG3qd_M";
-
-
-        const product =
-            document.createElement("div");
-
-        product.className = "product";
-
-        product.dataset.category = category;
-
-
-        product.innerHTML = `
-
-            <div class="product-image">
-
-                <img src="${image}" alt="${name}">
-
-                <button class="favorite"
-                    onclick="favorite(this)">
-                    ♡
-                </button>
-
-            </div>
-
-            <div class="product-info">
-
-                <div class="product-category">
-                    ${category}
-                </div>
-
-                <h3>${name}</h3>
-
-                <div class="price">
-                    ${Number(price).toLocaleString("pt-MZ")} MT
-                </div>
-
-                <div class="location">
-                    📍 ${location}
-                </div>
-
-                <p style="color:#666;font-size:13px;margin-bottom:12px;">
-                    ${description}
-                </p>
-
-                <button class="contact-button"
-                    onclick="contactSeller('${name}')">
-                    Contactar vendedor
-                </button>
-
-            </div>
-
-        `;
-
-
-        document
-            .getElementById("products")
-            .prepend(product);
-
-
-        closeModal();
-
-        document.getElementById("publishForm").reset();
-
-        alert("Anúncio publicado com sucesso! 🎉");
 });
-    
-</script>
 
+}catch(error){
+
+console.error(error);
+
+container.innerHTML=
+`<div class="empty">
+Não foi possível carregar os anúncios.
+</div>`;
+
+}
+
+}
+
+
+/* ================================
+   PESQUISA
+================================ */
+
+document
+.getElementById("search")
+.addEventListener("input",function(){
+
+const text=this.value.toLowerCase();
+
+document
+.querySelectorAll(".product")
+.forEach(function(product){
+
+const name=
+product.querySelector("h3")
+.textContent
+.toLowerCase();
+
+const category=
+(product.dataset.category || "")
+.toLowerCase();
+
+product.style.display=
+name.includes(text) ||
+category.includes(text)
+?
+"block"
+:
+"none";
+
+});
+
+});
+
+
+/* ================================
+   CATEGORIAS
+================================ */
+
+function filterCategory(category){
+
+document
+.querySelectorAll(".product")
+.forEach(function(product){
+
+product.style.display=
+product.dataset.category===category
+?
+"block"
+:
+"none";
+
+});
+
+document
+.getElementById("products-section")
+.scrollIntoView({
+behavior:"smooth"
+});
+
+}
+
+
+/* ================================
+   FAVORITOS
+================================ */
+
+function favorite(button){
+
+button.textContent=
+button.textContent==="♡"
+?
+"♥"
+:
+"♡";
+
+}
+
+
+/* ================================
+   CONTACTO
+================================ */
+
+function contactSeller(product){
+
+alert(
+"O contacto do vendedor de "+
+product+
+" será adicionado em breve."
+);
+
+}
+
+
+/* ================================
+   SCROLL
+================================ */
+
+function scrollToProducts(){
+
+document
+.getElementById("products-section")
+.scrollIntoView({
+behavior:"smooth"
+});
+
+}
+
+
+/* ================================
+   PUBLICAR PRODUTO
+================================ */
+
+document
+.getElementById("publishForm")
+.addEventListener(
+"submit",
+async function(event){
+
+event.preventDefault();
+
+const button=
+document.querySelector(".publish-button");
+
+button.disabled=true;
+
+button.textContent=
+"Publicando...";
+
+
+const name=
+document
+.getElementById("productName")
+.value
+.trim();
+
+const price=
+Number(
+document
+.getElementById("productPrice")
+.value
+);
+
+const category=
+document
+.getElementById("productCategory")
+.value;
+
+const location=
+document
+.getElementById("productLocation")
+.value
+.trim();
+
+const description=
+document
+.getElementById("productDescription")
+.value
+.trim();
+
+
+try{
+
+const response=
+await fetch(
+`${SUPABASE_URL}/rest/v1/products`,
+{
+
+method:"POST",
+
+headers:{
+
+"apikey":SUPABASE_KEY,
+
+"Authorization":
+`Bearer ${SUPABASE_KEY}`,
+
+"Content-Type":
+"application/json",
+
+"Prefer":
+"return=representation"
+
+},
+
+body:JSON.stringify({
+
+name:name,
+
+price:price,
+
+category:category,
+
+location:location,
+
+description:description,
+
+image_url:
+"https://images.unsplash.com/photo-1523275335684-37898b6baf30"
+
+})
+
+}
+);
+
+
+if(!response.ok){
+
+const error=
+await response.text();
+
+console.error(error);
+
+throw new Error(error);
+
+}
+
+
+const saved=
+await response.json();
+
+console.log(
+"Anúncio salvo:",
+saved
+);
+
+
+alert(
+"Anúncio publicado com sucesso! 🎉"
+);
+
+document
+.getElementById("publishForm")
+.reset();
+
+closeModal();
+
+await loadProducts();
+
+
+}catch(error){
+
+console.error(error);
+
+alert(
+"Não foi possível publicar o anúncio. Verifica a configuração do Supabase."
+);
+
+}finally{
+
+button.disabled=false;
+
+button.textContent=
+"Publicar anúncio";
+
+}
+
+});
+
+
+/* ================================
+   INICIAR
+================================ */
+
+loadProducts();
+
+</script>
 
 </body>
 </html>
