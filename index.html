@@ -14,14 +14,13 @@
         }
 
         body {
-            font-family: Arial, Helvetica, sans-serif;
+            font-family: Arial, sans-serif;
             background: #f6f7f9;
             color: #171717;
         }
 
-        /* HEADER */
         header {
-            background: #ffffff;
+            background: white;
             border-bottom: 1px solid #e5e5e5;
             position: sticky;
             top: 0;
@@ -49,7 +48,6 @@
 
         .search-box {
             flex: 1;
-            position: relative;
         }
 
         .search-box input {
@@ -60,11 +58,6 @@
             outline: none;
             font-size: 15px;
             background: #f8f8f8;
-        }
-
-        .search-box input:focus {
-            border-color: #0b8f4d;
-            background: white;
         }
 
         .sell-button {
@@ -78,11 +71,6 @@
             white-space: nowrap;
         }
 
-        .sell-button:hover {
-            opacity: 0.9;
-        }
-
-        /* HERO */
         .hero {
             background: linear-gradient(135deg, #071b12, #0b8f4d);
             color: white;
@@ -101,16 +89,13 @@
 
         .hero p {
             font-size: 17px;
-            opacity: 0.9;
+            opacity: .9;
             max-width: 600px;
             line-height: 1.6;
         }
 
         .hero-buttons {
             margin-top: 25px;
-            display: flex;
-            gap: 12px;
-            flex-wrap: wrap;
         }
 
         .hero-button {
@@ -119,6 +104,7 @@
             border: none;
             font-weight: bold;
             cursor: pointer;
+            margin-right: 8px;
         }
 
         .primary {
@@ -129,10 +115,9 @@
         .secondary {
             background: transparent;
             color: white;
-            border: 1px solid rgba(255,255,255,0.5);
+            border: 1px solid white;
         }
 
-        /* MAIN */
         .container {
             max-width: 1200px;
             margin: auto;
@@ -141,22 +126,10 @@
 
         .section-title {
             display: flex;
-            align-items: center;
             justify-content: space-between;
             margin-bottom: 18px;
         }
 
-        .section-title h2 {
-            font-size: 23px;
-        }
-
-        .view-all {
-            color: #0b8f4d;
-            font-weight: bold;
-            cursor: pointer;
-        }
-
-        /* CATEGORIES */
         .categories {
             display: grid;
             grid-template-columns: repeat(6, 1fr);
@@ -171,12 +144,11 @@
             padding: 20px 10px;
             text-align: center;
             cursor: pointer;
-            transition: 0.2s;
         }
 
         .category:hover {
-            transform: translateY(-3px);
             border-color: #0b8f4d;
+            transform: translateY(-3px);
         }
 
         .category-icon {
@@ -189,7 +161,6 @@
             font-weight: bold;
         }
 
-        /* PRODUCTS */
         .products {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -201,12 +172,6 @@
             border-radius: 14px;
             overflow: hidden;
             border: 1px solid #e6e6e6;
-            transition: 0.2s;
-        }
-
-        .product:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 10px 25px rgba(0,0,0,0.08);
         }
 
         .product-image {
@@ -231,7 +196,6 @@
             background: white;
             font-size: 18px;
             cursor: pointer;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
         }
 
         .product-info {
@@ -242,7 +206,6 @@
             color: #0b8f4d;
             font-size: 12px;
             font-weight: bold;
-            text-transform: uppercase;
             margin-bottom: 7px;
         }
 
@@ -274,11 +237,6 @@
             cursor: pointer;
         }
 
-        .contact-button:hover {
-            opacity: 0.9;
-        }
-
-        /* CTA */
         .cta {
             margin-top: 45px;
             background: white;
@@ -288,18 +246,8 @@
             display: flex;
             align-items: center;
             justify-content: space-between;
-            gap: 20px;
         }
 
-        .cta h2 {
-            margin-bottom: 7px;
-        }
-
-        .cta p {
-            color: #666;
-        }
-
-        /* FOOTER */
         footer {
             background: #101010;
             color: white;
@@ -312,44 +260,85 @@
             margin: auto;
             display: flex;
             justify-content: space-between;
-            gap: 30px;
-            flex-wrap: wrap;
-        }
-
-        .footer-logo {
-            font-size: 21px;
-            font-weight: bold;
-            margin-bottom: 10px;
         }
 
         .footer-text {
             color: #aaa;
             max-width: 350px;
-            line-height: 1.5;
+            margin-top: 10px;
         }
 
-        .footer-links {
+        /* FORMULÁRIO */
+
+        .modal {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,.65);
+            z-index: 1000;
+            padding: 20px;
+            overflow-y: auto;
+        }
+
+        .modal-content {
+            background: white;
+            max-width: 550px;
+            margin: 40px auto;
+            border-radius: 15px;
+            padding: 25px;
+        }
+
+        .modal-header {
             display: flex;
-            gap: 25px;
+            justify-content: space-between;
+            margin-bottom: 20px;
         }
 
-        .footer-links span {
-            color: #ccc;
+        .close {
+            border: none;
+            background: none;
+            font-size: 25px;
             cursor: pointer;
         }
 
-        .copyright {
-            max-width: 1200px;
-            margin: 25px auto 0;
-            padding-top: 20px;
-            border-top: 1px solid #333;
-            color: #888;
-            font-size: 13px;
+        .form-group {
+            margin-bottom: 15px;
         }
 
-        /* MOBILE */
-        @media (max-width: 800px) {
+        .form-group label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 7px;
+        }
 
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 15px;
+        }
+
+        .form-group textarea {
+            height: 100px;
+            resize: vertical;
+        }
+
+        .publish-button {
+            width: 100%;
+            padding: 14px;
+            border: none;
+            border-radius: 9px;
+            background: #0b8f4d;
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        @media (max-width: 800px) {
             .topbar {
                 flex-wrap: wrap;
             }
@@ -363,14 +352,6 @@
                 order: 3;
             }
 
-            .sell-button {
-                margin-left: auto;
-            }
-
-            .hero h1 {
-                font-size: 30px;
-            }
-
             .categories {
                 grid-template-columns: repeat(3, 1fr);
             }
@@ -379,30 +360,14 @@
                 grid-template-columns: repeat(2, 1fr);
             }
 
-            .product-image img {
-                height: 190px;
-            }
-
             .cta {
                 flex-direction: column;
                 align-items: flex-start;
+                gap: 15px;
             }
         }
 
         @media (max-width: 500px) {
-
-            .topbar {
-                padding: 13px;
-            }
-
-            .hero {
-                padding: 40px 17px;
-            }
-
-            .container {
-                padding: 28px 14px;
-            }
-
             .categories {
                 grid-template-columns: repeat(2, 1fr);
             }
@@ -411,12 +376,8 @@
                 grid-template-columns: 1fr;
             }
 
-            .product-image img {
-                height: 230px;
-            }
-
             .hero h1 {
-                font-size: 27px;
+                font-size: 28px;
             }
         }
     </style>
@@ -425,7 +386,6 @@
 <body>
 
 <header>
-
     <div class="topbar">
 
         <div class="logo">
@@ -440,12 +400,11 @@
             >
         </div>
 
-        <button class="sell-button" onclick="publishAd()">
+        <button class="sell-button" onclick="openModal()">
             + Publicar anúncio
         </button>
 
     </div>
-
 </header>
 
 
@@ -466,7 +425,7 @@
                 Explorar produtos
             </button>
 
-            <button class="hero-button secondary" onclick="publishAd()">
+            <button class="hero-button secondary" onclick="openModal()">
                 Publicar anúncio
             </button>
 
@@ -481,9 +440,7 @@
 
     <div class="section-title">
         <h2>Explorar categorias</h2>
-        <span class="view-all">Ver todas</span>
     </div>
-
 
     <div class="categories">
 
@@ -521,18 +478,11 @@
 
 
     <div class="section-title" id="products-section">
-
         <h2>Produtos recentes</h2>
-
-        <span class="view-all" onclick="showAllProducts()">
-            Ver todos
-        </span>
-
     </div>
 
 
     <div class="products" id="products">
-
 
         <div class="product" data-category="Telemóveis">
 
@@ -565,10 +515,8 @@
                     📍 Maputo
                 </div>
 
-                <button
-                    class="contact-button"
-                    onclick="contactSeller('Samsung Galaxy')"
-                >
+                <button class="contact-button"
+                    onclick="contactSeller('Samsung Galaxy')">
                     Contactar vendedor
                 </button>
 
@@ -608,10 +556,8 @@
                     📍 Matola
                 </div>
 
-                <button
-                    class="contact-button"
-                    onclick="contactSeller('Laptop HP')"
-                >
+                <button class="contact-button"
+                    onclick="contactSeller('Laptop HP')">
                     Contactar vendedor
                 </button>
 
@@ -651,10 +597,8 @@
                     📍 Maputo
                 </div>
 
-                <button
-                    class="contact-button"
-                    onclick="contactSeller('Tênis')"
-                >
+                <button class="contact-button"
+                    onclick="contactSeller('Tênis')">
                     Contactar vendedor
                 </button>
 
@@ -662,23 +606,20 @@
 
         </div>
 
-
     </div>
 
 
     <section class="cta">
 
         <div>
-
             <h2>Tens algo para vender?</h2>
 
             <p>
                 Publica o teu anúncio e encontra compradores em Moçambique.
             </p>
-
         </div>
 
-        <button class="sell-button" onclick="publishAd()">
+        <button class="sell-button" onclick="openModal()">
             + Publicar anúncio
         </button>
 
@@ -692,60 +633,168 @@
     <div class="footer-content">
 
         <div>
-
-            <div class="footer-logo">
-                🛒 MozabazarHub
-            </div>
+            <strong>🛒 MozabazarHub</strong>
 
             <p class="footer-text">
                 Um marketplace para comprar e vender produtos em Moçambique.
             </p>
-
         </div>
-
-
-        <div class="footer-links">
-
-            <span onclick="alert('Página em desenvolvimento')">
-                Sobre nós
-            </span>
-
-            <span onclick="alert('Página em desenvolvimento')">
-                Ajuda
-            </span>
-
-            <span onclick="alert('Página em desenvolvimento')">
-                Contacto
-            </span>
-
-        </div>
-
-    </div>
-
-
-    <div class="copyright">
-
-        © 2026 MozabazarHub — Todos os direitos reservados.
 
     </div>
 
 </footer>
 
 
+<!-- FORMULÁRIO DE PUBLICAÇÃO -->
+
+<div class="modal" id="publishModal">
+
+    <div class="modal-content">
+
+        <div class="modal-header">
+
+            <h2>Publicar anúncio</h2>
+
+            <button class="close" onclick="closeModal()">
+                ×
+            </button>
+
+        </div>
+
+
+        <form id="publishForm">
+
+            <div class="form-group">
+
+                <label>Nome do produto</label>
+
+                <input
+                    type="text"
+                    id="productName"
+                    placeholder="Ex: iPhone 13"
+                    required
+                >
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>Preço (MT)</label>
+
+                <input
+                    type="number"
+                    id="productPrice"
+                    placeholder="Ex: 25000"
+                    required
+                >
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>Categoria</label>
+
+                <select id="productCategory" required>
+
+                    <option value="">
+                        Escolher categoria
+                    </option>
+
+                    <option>Telemóveis</option>
+                    <option>Computadores</option>
+                    <option>Moda</option>
+                    <option>Carros</option>
+                    <option>Casa</option>
+                    <option>Jogos</option>
+                    <option>Outros</option>
+
+                </select>
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>Localização</label>
+
+                <input
+                    type="text"
+                    id="productLocation"
+                    placeholder="Ex: Maputo"
+                    required
+                >
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>Descrição</label>
+
+                <textarea
+                    id="productDescription"
+                    placeholder="Descreve o produto..."
+                ></textarea>
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>Imagem do produto</label>
+
+                <input
+                    type="file"
+                    id="productImage"
+                    accept="image/*"
+                >
+
+            </div>
+
+
+            <button
+                type="submit"
+                class="publish-button"
+            >
+                Publicar anúncio
+            </button>
+
+        </form>
+
+    </div>
+
+</div>
+
+
 <script>
+
+    /* ABRIR FORMULÁRIO */
+
+    function openModal() {
+
+        document.getElementById("publishModal").style.display = "block";
+
+    }
+
+
+    /* FECHAR FORMULÁRIO */
+
+    function closeModal() {
+
+        document.getElementById("publishModal").style.display = "none";
+
+    }
+
 
     /* PESQUISA */
 
-    const search = document.getElementById("search");
+    document.getElementById("search").addEventListener("input", function() {
 
-    search.addEventListener("input", function () {
+        const text = this.value.toLowerCase();
 
-        const text = search.value.toLowerCase();
-
-        const products =
-            document.querySelectorAll(".product");
-
-        products.forEach(function(product) {
+        document.querySelectorAll(".product").forEach(function(product) {
 
             const name =
                 product.querySelector("h3")
@@ -753,70 +802,33 @@
                 .toLowerCase();
 
             const category =
-                product.dataset.category
-                .toLowerCase();
+                product.dataset.category.toLowerCase();
 
-            if (
-                name.includes(text) ||
-                category.includes(text)
-            ) {
-
-                product.style.display = "block";
-
-            } else {
-
-                product.style.display = "none";
-
-            }
+            product.style.display =
+                name.includes(text) || category.includes(text)
+                ? "block"
+                : "none";
 
         });
 
     });
 
 
-    /* CATEGORIAS */
+    /* FILTRAR CATEGORIA */
 
     function filterCategory(category) {
 
-        const products =
-            document.querySelectorAll(".product");
+        document.querySelectorAll(".product").forEach(function(product) {
 
-        products.forEach(function(product) {
-
-            if (product.dataset.category === category) {
-
-                product.style.display = "block";
-
-            } else {
-
-                product.style.display = "none";
-
-            }
+            product.style.display =
+                product.dataset.category === category
+                ? "block"
+                : "none";
 
         });
 
         document.getElementById("products-section")
-            .scrollIntoView({
-                behavior: "smooth"
-            });
-
-    }
-
-
-    /* MOSTRAR TODOS */
-
-    function showAllProducts() {
-
-        const products =
-            document.querySelectorAll(".product");
-
-        products.forEach(function(product) {
-
-            product.style.display = "block";
-
-        });
-
-        search.value = "";
+            .scrollIntoView({ behavior: "smooth" });
 
     }
 
@@ -825,38 +837,22 @@
 
     function favorite(button) {
 
-        if (button.textContent === "♡") {
-
-            button.textContent = "♥";
-
-        } else {
-
-            button.textContent = "♡";
-
-        }
+        button.textContent =
+            button.textContent === "♡"
+            ? "♥"
+            : "♡";
 
     }
 
 
-    /* CONTACTAR */
+    /* CONTACTO */
 
     function contactSeller(product) {
 
         alert(
-            "Contacto do vendedor de " +
+            "O contacto do vendedor de " +
             product +
             " será adicionado em breve."
-        );
-
-    }
-
-
-    /* PUBLICAR */
-
-    function publishAd() {
-
-        alert(
-            "Sistema de publicação de anúncios será adicionado no próximo passo!"
         );
 
     }
@@ -867,13 +863,114 @@
     function scrollToProducts() {
 
         document.getElementById("products-section")
-            .scrollIntoView({
-                behavior: "smooth"
-            });
+            .scrollIntoView({ behavior: "smooth" });
 
     }
+
+
+    /* PUBLICAR PRODUTO */
+
+    document.getElementById("publishForm")
+        .addEventListener("submit", function(event) {
+
+        event.preventDefault();
+
+        const name =
+            document.getElementById("productName").value;
+
+        const price =
+            document.getElementById("productPrice").value;
+
+        const category =
+            document.getElementById("productCategory").value;
+
+        const location =
+            document.getElementById("productLocation").value;
+
+        const description =
+            document.getElementById("productDescription").value;
+
+        const imageInput =
+            document.getElementById("productImage");
+
+        let image =
+            "https://images.unsplash.com/photo-1523275335684-37898b6baf30";
+
+        if (imageInput.files.length > 0) {
+
+            image =
+                URL.createObjectURL(imageInput.files[0]);
+
+        }
+
+
+        const product =
+            document.createElement("div");
+
+        product.className = "product";
+
+        product.dataset.category = category;
+
+
+        product.innerHTML = `
+
+            <div class="product-image">
+
+                <img src="${image}" alt="${name}">
+
+                <button class="favorite"
+                    onclick="favorite(this)">
+                    ♡
+                </button>
+
+            </div>
+
+            <div class="product-info">
+
+                <div class="product-category">
+                    ${category}
+                </div>
+
+                <h3>${name}</h3>
+
+                <div class="price">
+                    ${Number(price).toLocaleString("pt-MZ")} MT
+                </div>
+
+                <div class="location">
+                    📍 ${location}
+                </div>
+
+                <p style="color:#666;font-size:13px;margin-bottom:12px;">
+                    ${description}
+                </p>
+
+                <button class="contact-button"
+                    onclick="contactSeller('${name}')">
+                    Contactar vendedor
+                </button>
+
+            </div>
+
+        `;
+
+
+        document
+            .getElementById("products")
+            .prepend(product);
+
+
+        closeModal();
+
+        document.getElementById("publishForm").reset();
+
+        alert("Anúncio publicado com sucesso! 🎉");
+
+    });
 
 </script>
 
 </body>
 </html>
+
+
