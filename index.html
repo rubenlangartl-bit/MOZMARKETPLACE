@@ -908,236 +908,35 @@ behavior:"smooth"
    PUBLICAR PRODUTO
 ================================ */
 
-document
-.getElementById("publishForm")
-.addEventListener(
-"submit",
-async function(event){
+async function publicarAnuncio(event) {
+  if (event) event.preventDefault();
 
-event.preventDefault();
-
-const button=
-document.querySelector(".publish-button");
-
-button.disabled=true;
-
-button.textContent=
-"Publicando...";
-
-
-const name=
-document
-.getElementById("productName")
-.value
-.trim();
-
-const price=
-Number(
-document
-.getElementById("productPrice")
-.value
-);
-
-const category=
-document
-.getElementById("productCategory")
-.value;
-
-const location=
-document
-.getElementById("productLocation")
-.value
-.trim();
-
-const description=
-document
-.getElementById("productDescription")
-.value
-.trim();
-
-
-try{
-
-const response=
-await fetch(
-`${SUPABASE_URL}/rest/v1/products`,
-{
-
-method:"POST",
-
-headers:{
-
-"apikey":SUPABASE_KEY,
-
-"Authorization":
-`Bearer ${SUPABASE_KEY}`,
-
-"Content-Type":
-"application/json",
-
-"Prefer":
-"return=representation"
-
-},
-
-body:JSON.stringify({
-
-name:name,
-
-price:price,
-
-category:category,
-
-location:location,
-
-description:description,
-
-image_url:
-"https://images.unsplash.com/photo-1523275335684-37898b6baf30"
-
-})
-
-}
-);
-
-
-if(!response.ok){
-
-const error=
-await response.text();
-
-console.error(error);
-
-throw new Error(error);
-
-}
-
-
-const saved=
-await response.json();
-
-console.log(
-"Anúncio salvo:",
-saved
-);
-
-
-alert(
-"Anúncio publicado com sucesso! 🎉"
-);
-
-document
-.getElementById("publishForm")
-.reset();
-
-closeModal();
-
-await loadProducts();
-
-
-}catch(error){
-
-console.error(error);
-
-alert(
-"Não foi possível publicar o anúncio. Verifica a configuração do Supabase."
-);
-
-}finally{
-
-button.disabled=false;
-
-button.textContent=
-"Publicar anúncio";
-
-}
-
-});
-
-
-/* ================================
-   INICIAR
-================================ */
-
-loadProducts();
-<script>
-  // Função para publicar o anúncio
-  async function publicarAnuncio() {
-    const fileInput = document.getElementById('imagemProduto'); // ID do input tipo file
-    const file = fileInput ? fileInput.files[0] : null;
-    let imageUrl = '';
-
-    // 1. Faz upload da imagem para o bucket "produtos" no Supabase
-    if (file) {
-      const fileName = `${Date.now()}_${file.name}`;
-
-      const { data: uploadData, error: uploadError } = await supabase.storage
-        .from('produtos')
-        .upload(fileName, file);
-
-      if (uploadError) {
-        alert('Erro ao carregar imagem: ' + uploadError.message);
-        return;
-      }
-
-      // Pega a URL pública
-      const { data: urlData } = supabase.storage
-        .from('produtos')
-        .getPublicUrl(fileName);
-
-      imageUrl = urlData.publicUrl;
-    }
-
-    // 2. Insere no banco de dados
-    const { error: dbError } = await supabase
-      .from('products') // ou 'anuncios', conforme a tua tabela
-      .insert([
-        {
-          title: document.getElementById('titulo').value,
-          price: document.getElementById('preco').value,
-          location: document.getElementById('localizacao').value,
-          description: document.getElementById('descricao').value,
-          image_url: imageUrl // URL da imagem salva no storage
-        }
-      ]);
-
-    if (dbError) {
-      alert('Erro ao salvar anúncio: ' + dbError.message);
-    } else {
-      alert('Anúncio publicado com sucesso!');
-      window.location.reload();
-    }
-  }
-</script>
-    async function publicarAnuncio(event) {
-  if (event) event.preventDefault(); // Evita recarregar a página ao submeter
-
-  // 1. Pegar o ficheiro do input de imagem
-  const fileInput = document.getElementById('imagemProduto'); // confirme se o id no HTML é este
+  // 1. Pegar os elementos do formulário (ajuste os IDs se forem diferentes)
+  const fileInput = document.getElementById('imagemProduto'); 
   const file = fileInput && fileInput.files ? fileInput.files[0] : null;
 
   if (!file) {
-    alert('Por favor, selecione uma imagem antes de publicar!');
+    alert('Por favor, selecione uma imagem do produto!');
     return;
   }
 
-  // 2. Gerar um nome único para o ficheiro (evita sobrepor imagens com o mesmo nome)
+  // Nome do ficheiro único sem espaços
   const fileName = `${Date.now()}_${file.name.replace(/\s+/g, '_')}`;
 
   try {
-    // 3. Upload do ficheiro para o Bucket "produtos" no Supabase Storage
+    // 2. Upload para o bucket "produtos" no Supabase Storage
     const { data: uploadData, error: uploadError } = await supabase
       .storage
-      .from('produtos') // Nome do seu Bucket no Supabase Storage
+      .from('produtos')
       .upload(fileName, file);
 
     if (uploadError) {
-      console.error('Erro no upload para o Storage:', uploadError.message);
+      console.error('Erro no Storage:', uploadError.message);
       alert('Erro ao carregar a imagem: ' + uploadError.message);
       return;
     }
 
-    // 4. Obter a URL pública da imagem recém-carregada
+    // 3. Obter a URL pública gerada
     const { data: urlData } = supabase
       .storage
       .from('produtos')
@@ -1145,27 +944,30 @@ loadProducts();
 
     const publicImageUrl = urlData.publicUrl;
 
-    // 5. Inserir o novo registo na tabela do Supabase com a URL real da imagem
+    // 4. Inserir o novo registo na tabela "anuncios"
     const { data, error: dbError } = await supabase
-      .from('anuncios') // Nome da sua tabela no Supabase
+      .from('anuncios')
       .insert([
         {
           image_url: publicImageUrl
-          // Adicione os outros campos aqui se necessário, ex:
-          // titulo: document.getElementById('tituloInput').value
+          // Adicione os outros campos aqui se tiver no formulário, por exemplo:
+          // titulo: document.getElementById('titulo').value,
+          // preco: document.getElementById('preco').value
         }
       ]);
 
     if (dbError) {
-      console.error('Erro ao guardar na tabela:', dbError.message);
-      alert('Erro ao publicar o anúncio na base de dados.');
+      console.error('Erro na base de dados:', dbError.message);
+      alert('Erro ao guardar anúncio na tabela: ' + dbError.message);
     } else {
       alert('Anúncio publicado com sucesso!');
       
-      // Limpa o formulário e recarrega a lista de produtos
+      // Limpa o input de imagem
       if (fileInput) fileInput.value = '';
+      
+      // Recarrega os produtos na página
       if (typeof loadProducts === 'function') {
-        loadProducts(); 
+        loadProducts();
       }
     }
 
@@ -1173,7 +975,6 @@ loadProducts();
     console.error('Erro inesperado:', err);
   }
 }
-</script>
 
 </body>
 </html>
