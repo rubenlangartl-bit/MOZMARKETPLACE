@@ -1109,6 +1109,70 @@ loadProducts();
     }
   }
 </script>
+    async function publicarAnuncio(event) {
+  if (event) event.preventDefault(); // Evita recarregar a página ao submeter
+
+  // 1. Pegar o ficheiro do input de imagem
+  const fileInput = document.getElementById('imagemProduto'); // confirme se o id no HTML é este
+  const file = fileInput && fileInput.files ? fileInput.files[0] : null;
+
+  if (!file) {
+    alert('Por favor, selecione uma imagem antes de publicar!');
+    return;
+  }
+
+  // 2. Gerar um nome único para o ficheiro (evita sobrepor imagens com o mesmo nome)
+  const fileName = `${Date.now()}_${file.name.replace(/\s+/g, '_')}`;
+
+  try {
+    // 3. Upload do ficheiro para o Bucket "produtos" no Supabase Storage
+    const { data: uploadData, error: uploadError } = await supabase
+      .storage
+      .from('produtos') // Nome do seu Bucket no Supabase Storage
+      .upload(fileName, file);
+
+    if (uploadError) {
+      console.error('Erro no upload para o Storage:', uploadError.message);
+      alert('Erro ao carregar a imagem: ' + uploadError.message);
+      return;
+    }
+
+    // 4. Obter a URL pública da imagem recém-carregada
+    const { data: urlData } = supabase
+      .storage
+      .from('produtos')
+      .getPublicUrl(fileName);
+
+    const publicImageUrl = urlData.publicUrl;
+
+    // 5. Inserir o novo registo na tabela do Supabase com a URL real da imagem
+    const { data, error: dbError } = await supabase
+      .from('anuncios') // Nome da sua tabela no Supabase
+      .insert([
+        {
+          image_url: publicImageUrl
+          // Adicione os outros campos aqui se necessário, ex:
+          // titulo: document.getElementById('tituloInput').value
+        }
+      ]);
+
+    if (dbError) {
+      console.error('Erro ao guardar na tabela:', dbError.message);
+      alert('Erro ao publicar o anúncio na base de dados.');
+    } else {
+      alert('Anúncio publicado com sucesso!');
+      
+      // Limpa o formulário e recarrega a lista de produtos
+      if (fileInput) fileInput.value = '';
+      if (typeof loadProducts === 'function') {
+        loadProducts(); 
+      }
+    }
+
+  } catch (err) {
+    console.error('Erro inesperado:', err);
+  }
+}
 </script>
 
 </body>
